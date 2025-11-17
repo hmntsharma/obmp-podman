@@ -62,4 +62,5 @@ Podman deployment of [OpenBMP](https://github.com/OpenBMP/obmp-docker) as a non-
 * [OpenBMP](https://www.openbmp.org/)
 * [Make systemd better for Podman with Quadlet](https://www.redhat.com/en/blog/quadlet-podman)
 * [podman-systemd.unit - systemd units using Podman Quadlet](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html)
+* [Nginx Proxy Manager](https://nginxproxymanager.com/)
 

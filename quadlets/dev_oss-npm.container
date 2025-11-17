@@ -14,5 +14,9 @@ Secret=NGINX_INITIAL_ADMIN_PASSWORD,type=env,target=INITIAL_ADMIN_PASSWORD
 Volume=%h/oss/nginx/data:/data:Z,U
 Volume=%h/oss/nginx/letsencrypt:/etc/letsencrypt:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

@@ -14,5 +14,9 @@ Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
 Secret=POSTGRES_DB,type=env,target=POSTGRES_DB
 Sysctl=net.ipv4.tcp_keepalive_intvl=30 net.ipv4.tcp_keepalive_probes=5 net.ipv4.tcp_keepalive_time=280
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

@@ -14,5 +14,9 @@ PublishPort=5000:5000
 Sysctl=net.ipv4.ip_unprivileged_port_start=0
 Volume=%h/dev_oss/haproxy-collector/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

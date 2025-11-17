@@ -12,5 +12,9 @@ PodmanArgs=--interactive --privileged --tty --cgroups=enabled
 Volume=%h/dev_obmp/zk-data:/var/lib/zookeeper/data:Z,U
 Volume=%h/dev_obmp/zk-log:/var/lib/zookeeper/log:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

@@ -17,5 +17,9 @@ Sysctl=net.ipv4.tcp_keepalive_intvl=30 net.ipv4.tcp_keepalive_probes=5 net.ipv4.
 Volume=%h/dev_obmp/postgres/data:/var/lib/postgresql/data:Z,U
 Volume=%h/dev_obmp/postgres/ts:/var/lib/postgresql/ts:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

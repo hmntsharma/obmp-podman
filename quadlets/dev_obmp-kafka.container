@@ -11,5 +11,9 @@ Network=dev_obmp-podman-network
 PodmanArgs=--interactive --privileged --tty --cgroups=enabled
 Volume=%h/dev_obmp/kafka-data:/var/lib/kafka/data:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

@@ -12,5 +12,9 @@ PodmanArgs=--interactive --privileged --tty --cgroups=enabled
 Sysctl=net.ipv4.tcp_keepalive_intvl=30 net.ipv4.tcp_keepalive_probes=5 net.ipv4.tcp_keepalive_time=280
 Volume=%h/dev_obmp/config:/config:Z,U
 
+[Service]
+TimeoutStartSec=300
+Restart=always
+
 [Install]
 WantedBy=default.target

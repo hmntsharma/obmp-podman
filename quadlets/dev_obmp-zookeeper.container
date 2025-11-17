@@ -1,0 +1,16 @@
+[Unit]
+Description=This is dev_obmp-zookeeper container
+Requires=dev_obmp-podman-network.network
+
+[Container]
+ContainerName=dev_obmp-zookeeper
+Environment=ZOOKEEPER_CLIENT_PORT=2281 ZOOKEEPER_TICK_TIME=2000
+Image=confluentinc/cp-zookeeper:7.1.1
+IP=10.28.0.10
+Network=dev_obmp-podman-network
+PodmanArgs=--interactive --privileged --tty --cgroups=enabled
+Volume=%h/dev_obmp/zk-data:/var/lib/zookeeper/data:Z,U
+Volume=%h/dev_obmp/zk-log:/var/lib/zookeeper/log:Z,U
+
+[Install]
+WantedBy=default.target

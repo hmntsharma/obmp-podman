@@ -1,0 +1,19 @@
+[Unit]
+Description=This is dev_obmp-psql-app container
+Requires=dev_obmp-podman-network.network dev_obmp-kafka.service dev_obmp-psql.service
+
+[Container]
+ContainerName=dev_obmp-psql-app
+Environment=MEM=6 KAFKA_FQDN=10.28.0.11:29092, RPKI_URL=https://rpki.cloudflare.com/rpki.json RPKI_PASS=None RPKI_USER=None ENABLE_RPKI=0 ENABLE_IRR=0 ENABLE_DBIP=0 "POSTGRES_REPORT_WINDOW=8 minute" POSTGRES_HOST=10.28.0.12 POSTGRES_PORT=5432 "POSTGRES_DROP_peer_event_log=1 year" "POSTGRES_DROP_stat_reports=4 months" "POSTGRES_DROP_ip_rib_log=4 months" "POSTGRES_DROP_alerts=4 months" "POSTGRES_DROP_ls_nodes_log=4 months" "POSTGRES_DROP_ls_links_log=4 months" "POSTGRES_DROP_ls_prefixes_log=4 months" "POSTGRES_DROP_stats_chg_byprefix=4 months" "POSTGRES_DROP_stats_chg_byasn=4 months" "POSTGRES_DROP_stats_chg_bypeer=4 months" "POSTGRES_DROP_stats_ip_origins=4 months" "POSTGRES_DROP_stats_peer_rib=4 months" "POSTGRES_DROP_stats_peer_update_counts=4 months"
+Image=openbmp/psql-app:2.2.2
+IP=10.28.0.13
+Network=dev_obmp-podman-network
+PodmanArgs=--interactive --privileged --tty --cgroups=enabled
+Secret=POSTGRES_PASSWORD,type=env,target=POSTGRES_PASSWORD
+Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
+Secret=POSTGRES_DB,type=env,target=POSTGRES_DB
+Sysctl=net.ipv4.tcp_keepalive_intvl=30 net.ipv4.tcp_keepalive_probes=5 net.ipv4.tcp_keepalive_time=280
+Volume=%h/dev_obmp/config:/config:Z,U
+
+[Install]
+WantedBy=default.target

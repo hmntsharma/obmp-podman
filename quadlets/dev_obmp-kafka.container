@@ -1,0 +1,15 @@
+[Unit]
+Description=This is dev_obmp-kafka container
+Requires=dev_obmp-podman-network.network dev_obmp-zookeeper.container
+
+[Container]
+ContainerName=dev_obmp-kafka
+Environment=KAFKA_BROKER_ID=1 KAFKA_ZOOKEEPER_CONNECT=10.28.0.10:2281 KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.28.0.11:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 KAFKA_NUM_PARTITIONS=8 KAFKA_LOG_RETENTION_MINUTES=90 KAFKA_LOG_ROLL_MS=3600000 KAFKA_LOG_SEGMENT_BYTES=1073742824 KAFKA_MESSAGE_MAX_BYTES=100000000 KAFKA_LOG_CLEANER_THREADS=2
+Image=confluentinc/cp-kafka:7.1.1
+IP=10.28.0.11
+Network=dev_obmp-podman-network
+PodmanArgs=--interactive --privileged --tty --cgroups=enabled
+Volume=%h/dev_obmp/kafka-data:/var/lib/kafka/data:Z,U
+
+[Install]
+WantedBy=default.target

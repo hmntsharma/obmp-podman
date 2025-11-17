@@ -1,0 +1,18 @@
+[Unit]
+Description=This is NginX Proxy Manager container for Grafana and other dashboards
+Requires=dev_oss-network.network
+
+[Container]
+ContainerName=oss-npm
+Image=jc21/nginx-proxy-manager:2.12.3
+IP=10.29.0.10
+Network=dev_oss-network
+PodmanArgs=--interactive --tty --cgroups=enabled
+PublishPort=8443:443
+Secret=NGINX_INITIAL_ADMIN_EMAIL,type=env,target=INITIAL_ADMIN_EMAIL
+Secret=NGINX_INITIAL_ADMIN_PASSWORD,type=env,target=INITIAL_ADMIN_PASSWORD
+Volume=%h/oss/nginx/data:/data:Z,U
+Volume=%h/oss/nginx/letsencrypt:/etc/letsencrypt:Z,U
+
+[Install]
+WantedBy=default.target

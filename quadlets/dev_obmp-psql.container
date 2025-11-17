@@ -1,0 +1,21 @@
+[Unit]
+Description=This is dev_obmp-psql container
+Requires=dev_obmp-podman-network.network
+
+[Container]
+ContainerName=dev_obmp-psql
+Exec=-c 'max_wal_size=2GB'
+Image=openbmp/postgres:2.2.1
+IP=10.28.0.12
+Network=dev_obmp-podman-network
+PodmanArgs=--interactive --privileged --tty --cgroups=enabled
+Secret=POSTGRES_PASSWORD,type=env,target=POSTGRES_PASSWORD
+Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
+Secret=POSTGRES_DB,type=env,target=POSTGRES_DB
+ShmSize=1g
+Sysctl=net.ipv4.tcp_keepalive_intvl=30 net.ipv4.tcp_keepalive_probes=5 net.ipv4.tcp_keepalive_time=280
+Volume=%h/dev_obmp/postgres/data:/var/lib/postgresql/data:Z,U
+Volume=%h/dev_obmp/postgres/ts:/var/lib/postgresql/ts:Z,U
+
+[Install]
+WantedBy=default.target

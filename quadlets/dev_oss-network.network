@@ -1,0 +1,11 @@
+[Unit]
+Description=This is obmp oss network
+
+[Network]
+NetworkName=dev_oss-network
+Gateway=10.29.0.1
+IPRange=10.29.0.0/16
+Subnet=10.29.0.0/16
+
+[Install]
+WantedBy=default.target

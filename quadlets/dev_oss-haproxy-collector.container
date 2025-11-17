@@ -1,0 +1,18 @@
+[Unit]
+Description=This is dev_oss-haproxy-collector container to load balance incoming BMP session requests
+Wants=dev_obmp-collector-@20.service dev_obmp-collector-@21.service dev_obmp-collector-@22.service dev_obmp-collector-@23.service 
+After=dev_obmp-collector-@20.service dev_obmp-collector-@21.service dev_obmp-collector-@22.service dev_obmp-collector-@23.service
+Requires=dev_oss-network.network
+
+[Container]
+ContainerName=dev_oss-haproxy-collector
+Image=library/haproxy:2.8.15
+IP=10.29.0.20
+Network=dev_oss-network
+PodmanArgs=--interactive --privileged --tty --cgroups=enabled
+PublishPort=5000:5000
+Sysctl=net.ipv4.ip_unprivileged_port_start=0
+Volume=%h/dev_oss/haproxy-collector/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z,U
+
+[Install]
+WantedBy=default.target
